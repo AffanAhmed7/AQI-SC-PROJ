@@ -1,0 +1,39 @@
+
+# AQI System - Project Requirements and Dependencies
+
+## System Prerequisites
+These are the required software tools to run the application locally.
+
+1. Java Development Kit (JDK) 17 or higher
+2. Maven 3.6+ (Build tool)
+3. MySQL Server 8.0+ (Database)
+4. Node.js 16+ (For Frontend)
+5. npm (Node Package Manager)
+
+## Backend Dependencies (Spring Boot)
+Defined in `pom.xml`.
+
+- **Framework**: Spring Boot 3.5.8
+- **Core Modules**:
+  - `spring-boot-starter-web`: RESTful APIs
+  - `spring-boot-starter-data-jpa`: Database interactions using Hibernate
+  - `spring-boot-starter-mail`: Email notifications
+  - `spring-boot-starter-thymeleaf`: Server-side templating (if used)
+  - `spring-boot-starter-validation`: Data validation
+- **Database Driver**: `mysql-connector-j`
+- **Utilities**:
+  - `org.json`: JSON parsing
+
+## Frontend Dependencies (React)
+Defined in `aqi-frontend/package.json`.
+
+- **Framework**: React 19.2.0
+- **Routing**: React Router DOM 7.9.6
+- **Visualization**:
+  - `recharts`: Data charting
+  - `leaflet` & `react-leaflet`: Maps
+- **UI Components**: `react-icons`
+
+## External APIs
+- **OpenWeatherMap API**: Required for Air Quality and Weather data.
+  - Key required in `application.properties`: `openweathermap.api.key`

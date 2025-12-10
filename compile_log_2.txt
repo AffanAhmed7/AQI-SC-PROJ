@@ -1,0 +1,23 @@
+﻿[INFO] Scanning for projects...
+[INFO] 
+[INFO] -------------------------< com.aqi:aqisystem >--------------------------
+[INFO] Building Intelligent AQI Monitoring System 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.4.1:clean (default-clean) @ aqisystem ---
+[INFO] Deleting E:\5TH SEMESTER\SOFTWARE CONSTRUCTION\aqi-system-springboot-main\target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ aqisystem ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ aqisystem ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 25 source files with javac [debug parameters release 17] to target\classes
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  3.226 s
+[INFO] Finished at: 2025-12-10T21:39:28+05:00
+[INFO] ------------------------------------------------------------------------

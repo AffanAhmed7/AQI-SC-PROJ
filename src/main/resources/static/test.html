@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AQI & Weather Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        input, button { padding: 5px 10px; margin: 5px; }
+        .result { margin-top: 20px; }
+        pre { background: #f4f4f4; padding: 10px; }
+    </style>
+</head>
+<body>
+    <h2>AQI & Weather API Test</h2>
+    <label>City Name: </label>
+    <input type="text" id="cityInput" placeholder="e.g., Kuala Lumpur">
+    <label>Units: </label>
+    <select id="units">
+        <option value="metric">Metric (°C)</option>
+        <option value="imperial">Imperial (°F)</option>
+    </select>
+    <button onclick="fetchData()">Fetch Data</button>
+
+    <div class="result" id="result"></div>
+
+    <script>
+        async function fetchData() {
+            const city = document.getElementById('cityInput').value.trim();
+            const units = document.getElementById('units').value;
+            const resultDiv = document.getElementById('result');
+
+            if (!city) {
+                alert("Please enter a city name.");
+                return;
+            }
+
+            resultDiv.innerHTML = "Fetching data...";
+
+            try {
+                const response = await fetch(`/api/data?city=${encodeURIComponent(city)}&units=${units}`);
+                
+                if (!response.ok) {
+                    const text = await response.text();
+                    resultDiv.innerHTML = `<b>Error:</b> ${text}`;
+                    return;
+                }
+
+                const data = await response.json();
+
+                resultDiv.innerHTML = `
+                    <h3>Results for ${city}</h3>
+                    <h4>AQI</h4>
+                    <pre>${JSON.stringify(data.aqi, null, 2)}</pre>
+                    <h4>Current Weather</h4>
+                    <pre>${JSON.stringify(data.currentWeather, null, 2)}</pre>
+                    <h4>Forecast</h4>
+                    <pre>${JSON.stringify(data.forecast, null, 2)}</pre>
+                `;
+            } catch (err) {
+                resultDiv.innerHTML = `<b>Error fetching data:</b> ${err.message}`;
+            }
+        }
+    </script>
+</body>
+</html>
