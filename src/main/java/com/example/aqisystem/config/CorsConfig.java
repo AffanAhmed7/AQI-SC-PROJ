@@ -14,16 +14,20 @@ public class CorsConfig {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
         
-        // Allow all origins (for development) - restrict in production
+        // Allow credentials (necessary for cookies/sessions)
         config.setAllowCredentials(true);
-        config.addAllowedOriginPattern("*"); // Use allowedOriginPattern for Spring Boot 2.4+
+        
+        // Specify the exact Netlify URL instead of using a wildcard (*)
+        // The frontend is deployed at: https://resilient-cactus-d4a9c1.netlify.app
+        config.addAllowedOrigin("https://aqii.netlify.app"); 
+        
+        // Allow all headers and methods
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
         
-        // Register CORS configuration for all paths
+        // Register CORS configuration for all paths ("/**")
         source.registerCorsConfiguration("/**", config);
         
         return new CorsFilter(source);
     }
 }
-
