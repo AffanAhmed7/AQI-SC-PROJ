@@ -1,0 +1,91 @@
+/* Full screen wrapper */
+.signin-wrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #d1e8ff, #f0ffee);
+  font-family: Arial, sans-serif;
+}
+
+/* Form container */
+.signin-box {
+  width: 400px;
+  background: #fdfdfd;
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: popUp 0.4s ease-out;
+}
+
+/* Title */
+.signin-title {
+  font-size: 26px;
+  font-weight: bold;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+/* Form */
+.signin-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Inputs */
+.signin-input {
+  padding: 12px;
+  font-size: 14px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+}
+
+.signin-input:focus {
+  outline: none;
+  border-color: #4aa3ff;
+  box-shadow: 0 0 5px rgba(74,163,255,0.5);
+}
+
+/* Continue button */
+.signin-btn {
+  padding: 12px;
+  font-size: 15px;
+  background-color: #000;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.signin-btn:hover {
+  background-color: #222;
+}
+
+/* Pop animation */
+@keyframes popUp {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+.bottom-link {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #555;
+  text-align: center;
+}
+
+.bottom-link a {
+  color: #4aa3ff;
+  text-decoration: none;
+  font-weight: 600;
+  margin-left: 5px;
+}
+
+.bottom-link a:hover {
+  text-decoration: underline;
+}

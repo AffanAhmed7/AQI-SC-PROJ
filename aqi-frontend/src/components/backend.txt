@@ -1,0 +1,262 @@
+import React, { useState, useEffect } from "react";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  Tooltip,
+  CartesianGrid,
+  BarChart,
+  Bar,
+} from "recharts";
+import {
+  FiWind,
+  FiMap,
+  FiStar,
+  FiSettings,
+  FiLogOut,
+  FiThermometer,
+  FiDroplet,
+  FiActivity,
+  FiMapPin,
+} from "react-icons/fi"; // subtle icons
+import "./home.css";
+
+export default function Home() {
+  const [data, setData] = useState(null); // backend data
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [healthMsg, setHealthMsg] = useState("");
+  const [healthDetail, setHealthDetail] = useState("");
+  const [healthColor, setHealthColor] = useState("#4caf50"); // green by default
+  const [pm25Status, setPm25Status] = useState("");
+
+  // Fetch data from backend
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        // Example fetch, replace with your actual API
+        const res = await fetch("/api/air-quality?city=NewYork");
+        if (!res.ok) throw new Error("Failed to fetch air quality data");
+        const resData = await res.json();
+        setData(resData);
+      } catch (err) {
+        console.error(err);
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchData();
+  }, []);
+
+  // Update health message and PM2.5 status
+  useEffect(() => {
+    if (!data) return;
+
+    const aqi = Number(data.aqi) || 0;
+    const pm25 = Number(data.pm25) || 0;
+
+    // Health message logic
+    if (aqi <= 50) {
+      setHealthMsg("Air quality is good");
+      setHealthDetail("It’s a great time for outdoor activities.");
+      setHealthColor("#4caf50"); // green
+    } else if (aqi <= 100) {
+      setHealthMsg("Air quality is acceptable");
+      setHealthDetail(
+        "Most people can enjoy outdoor activities normally. Sensitive individuals should take caution."
+      );
+      setHealthColor("#ff9800"); // orange
+    } else if (aqi <= 150) {
+      setHealthMsg("Unhealthy for sensitive groups");
+      setHealthDetail(
+        "Sensitive people should reduce prolonged outdoor exertion."
+      );
+      setHealthColor("#ff5722"); // deep orange
+    } else {
+      setHealthMsg("Unhealthy");
+      setHealthDetail("Everyone may begin to experience health effects.");
+      setHealthColor("#f44336"); // red
+    }
+
+    // PM2.5 status
+    if (pm25 <= 12) setPm25Status("Good");
+    else if (pm25 <= 35.4) setPm25Status("Moderate");
+    else if (pm25 <= 55.4) setPm25Status("Unhealthy for sensitive groups");
+    else if (pm25 <= 150.4) setPm25Status("Unhealthy");
+    else if (pm25 <= 250.4) setPm25Status("Very Unhealthy");
+    else setPm25Status("Hazardous");
+  }, [data]);
+
+  // Prepare chart data
+  const trendChartData = (data?.aqiTrend || []).map((value, i) => ({
+    day: `Day ${i + 1}`,
+    aqi: value || 0,
+  }));
+
+  const pollutantChartData = Object.entries(data?.pollutants || {}).map(
+    ([key, value]) => ({ pollutant: key.toUpperCase(), value: value || 0 })
+  );
+
+  if (loading) return <div style={{ padding: 50 }}>Loading data...</div>;
+  if (error) return <div style={{ padding: 50 }}>Error: {error}</div>;
+
+  return (
+    <>
+      <div className="home-wrapper">
+        {/* Sidebar */}
+        <aside className="sidebar">
+          <div className="sidebar-top">
+            <h2>
+              <FiWind className="wind-icon" /> AQI Monitor
+            </h2>
+            <button className="sidebar-btn">
+              <FiMap /> Map View
+            </button>
+            <button className="sidebar-btn">
+              <FiStar /> Favorites
+            </button>
+            <button className="sidebar-btn">
+              <FiSettings /> Settings
+            </button>
+          </div>
+          <div className="sidebar-bottom">
+            <button className="signout-btn">
+              <FiLogOut /> Sign Out
+            </button>
+          </div>
+        </aside>
+
+        {/* Main Dashboard */}
+        <main className="dashboard">
+          <div className="search-section">
+            <h1>Search Location</h1>
+            <p>Enter a city name to view its air quality</p>
+            <div className="search-box">
+              <input type="text" placeholder="Search for a city..." />
+              <button>Search</button>
+            </div>
+          </div>
+
+          <div className="stats-grid">
+            <div className="info-card aqi-box">
+              <p className="card-label">
+                <FiMapPin /> {data.city}
+              </p>
+              <h2 className="aqi-number">{data.aqi}</h2>
+              <span
+                className="aqi-tag"
+                style={{ backgroundColor: healthColor }}
+              >
+                {healthMsg}
+              </span>
+            </div>
+
+            <div className="info-card">
+              <p className="card-label">
+                <FiThermometer /> Temperature
+              </p>
+              <h2>{data.temperature}°C</h2>
+              <p className="card-sub">Comfortable conditions</p>
+            </div>
+
+            <div className="info-card">
+              <p className="card-label">
+                <FiDroplet /> Humidity
+              </p>
+              <h2>{data.humidity}%</h2>
+              <p className="card-sub">Moderate humidity</p>
+            </div>
+
+            <div className="info-card">
+              <p className="card-label">
+                <FiActivity /> PM2.5 Level
+              </p>
+              <h2>{data.pm25} µg/m³</h2>
+              <p className="card-sub">{pm25Status}</p>
+            </div>
+          </div>
+
+          <div className="charts-row">
+            <div className="chart-card">
+              <h2>7-Day AQI Trend</h2>
+              <p className="chart-subheading">
+                Historical air quality index over the past week
+              </p>
+              <LineChart
+                width={450}
+                height={250}
+                data={trendChartData}
+                margin={{ top: 20, right: 20, left: 0, bottom: 0 }}
+              >
+                <XAxis dataKey="day" />
+                <YAxis />
+                <Tooltip />
+                <CartesianGrid strokeDasharray="3 3" />
+                <Line
+                  type="monotone"
+                  dataKey="aqi"
+                  stroke="#007b83"
+                  strokeWidth={3}
+                  animationDuration={5000}
+                />
+              </LineChart>
+            </div>
+
+            <div className="chart-card">
+              <h2>Pollutant Levels</h2>
+              <p className="chart-subheading">
+                Current concentration of major air pollutants
+              </p>
+              <BarChart
+                width={450}
+                height={250}
+                data={pollutantChartData}
+                margin={{ top: 20, right: 20, left: 0, bottom: 0 }}
+              >
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="pollutant" />
+                <YAxis />
+                <Tooltip />
+                <Bar dataKey="value" fill="#007b83" animationDuration={5000} />
+              </BarChart>
+            </div>
+          </div>
+
+          <div className="health-section">
+            <h2>Health Recommendations</h2>
+            <div
+              className="health-box"
+              style={{ borderColor: healthColor }}
+            >
+              <h3 style={{ color: healthColor }}>✔ {healthMsg}</h3>
+              <p>{healthDetail}</p>
+            </div>
+            <ul className="health-list">
+              {data.aqi <= 50 && <li>✔ Outdoor activities are generally safe</li>}
+              {data.aqi > 50 && data.aqi <= 100 && (
+                <li>⚠ Sensitive individuals should take caution based on AQI</li>
+              )}
+              {data.aqi > 100 && data.aqi <= 150 && (
+                <li>⚠ Reduce prolonged outdoor exertion if sensitive</li>
+              )}
+              {data.aqi > 150 && <li>❌ Avoid outdoor activities</li>}
+            </ul>
+          </div>
+        </main>
+      </div>
+
+      {/* Footer */}
+      <footer className="site-footer">
+        <p>
+          © 2025 Your Company.{" "}
+          <a href="/contact" target="_blank" rel="noopener noreferrer">
+            Contact Us
+          </a>
+        </p>
+      </footer>
+    </>
+  );
+}

@@ -1,0 +1,273 @@
+/* ----------------------------
+   Global Dark Mode Overrides
+   ---------------------------- */
+
+/* Apply dark background and font globally */
+body.dark-mode {
+  background-color: #121212 !important;
+  color: #e0e0e0 !important;
+  transition: background 0.3s, color 0.3s;
+}
+
+/* -----------------------------
+   Home & Dashboard
+   ----------------------------- */
+body.dark-mode .home-wrapper,
+body.dark-mode .dashboard,
+body.dark-mode .stats-grid,
+body.dark-mode .charts-row,
+body.dark-mode .charts-row .chart-card {
+  background-color: #1e1e1e !important;
+  color: #e0e0e0 !important;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.5) !important;
+}
+
+/* Sidebar */
+body.dark-mode .sidebar {
+  background-color: #1a1a1a !important;
+  color: #e0e0e0 !important;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.5) !important;
+}
+
+body.dark-mode .sidebar-btn,
+body.dark-mode .signout-btn {
+  background-color: #222 !important;
+  color: #fff !important;
+}
+
+body.dark-mode .sidebar-btn:hover,
+body.dark-mode .signout-btn:hover {
+  background-color: #333 !important;
+}
+
+/* Search input & button */
+body.dark-mode input,
+body.dark-mode .search-box input,
+body.dark-mode .input {
+  background-color: #222 !important;
+  color: #e0e0e0 !important;
+  border: 1px solid #555 !important;
+}
+
+body.dark-mode .search-box button {
+  background-color: #007b83 !important;
+  color: #fff !important;
+}
+
+body.dark-mode .search-box button:hover {
+  background-color: #0097a7 !important;
+}
+
+/* -----------------------------
+   Stats Grid & AQI Boxes
+   ----------------------------- */
+body.dark-mode .info-card {
+  background-color: #1e1e1e !important;
+  color: #e0e0e0 !important;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.5) !important;
+}
+
+body.dark-mode .aqi-number {
+  color: #fff !important;
+}
+
+body.dark-mode .aqi-tag {
+  /* Keep AQI tag color as is (e.g., green, yellow, orange, red) */
+  color: #fff !important;
+}
+
+/* -----------------------------
+   Favorites Page
+   ----------------------------- */
+body.dark-mode .favorites-wrapper {
+  background-color: #121212 !important;
+  color: #e0e0e0 !important;
+}
+
+body.dark-mode .favorites-header h2,
+body.dark-mode .favorites-intro,
+body.dark-mode .current-city-card h3,
+body.dark-mode .favorites-list .favorite-item span {
+  color: #ccc !important;
+}
+
+body.dark-mode .back-btn,
+body.dark-mode .current-city-card button,
+body.dark-mode .favorites-list .favorite-item button {
+  background-color: #007b83 !important;
+  color: #fff !important;
+}
+
+body.dark-mode .back-btn:hover,
+body.dark-mode .current-city-card button:hover,
+body.dark-mode .favorites-list .favorite-item button:hover {
+  background-color: #0097a7 !important;
+}
+
+body.dark-mode .current-city-card,
+body.dark-mode .favorites-list .favorite-item {
+  background-color: #1e1e1e !important;
+  color: #e0e0e0 !important;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.5) !important;
+}
+
+/* -----------------------------
+   Settings Page
+   ----------------------------- */
+body.dark-mode .settings-card,
+body.dark-mode .profile-pic-section {
+  background-color: #1e1e1e !important;
+  color: #e0e0e0 !important;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.5) !important;
+}
+
+body.dark-mode .save-btn {
+  background-color: #007b83 !important;
+  color: #fff !important;
+}
+
+body.dark-mode .save-btn:hover {
+  background-color: #0097a7 !important;
+}
+
+/* -----------------------------
+   Charts Styling
+   ----------------------------- */
+body.dark-mode .recharts-cartesian-grid line {
+  stroke: #444 !important;
+}
+
+body.dark-mode .recharts-xAxis text,
+body.dark-mode .recharts-yAxis text {
+  fill: #e0e0e0 !important;
+}
+
+/* Line & Bar charts smooth animation fix for dark mode */
+body.dark-mode .recharts-line,
+body.dark-mode .recharts-bar-rectangle {
+  stroke-linecap: round !important;
+}
+
+/* -----------------------------
+   General inputs/buttons
+   ----------------------------- */
+body.dark-mode input,
+body.dark-mode textarea,
+body.dark-mode select {
+  background-color: #222 !important;
+  color: #e0e0e0 !important;
+  border: 1px solid #555 !important;
+}
+
+body.dark-mode button {
+  background-color: #007b83 !important;
+  color: #fff !important;
+}
+
+body.dark-mode button:hover {
+  background-color: #0097a7 !important;
+}
+/* -----------------------------
+   SignIn Page Dark Mode
+   ----------------------------- */
+body.dark-mode .signin-wrapper {
+  background: linear-gradient(135deg, #1a1a1a, #222) !important;
+  color: #e0e0e0 !important;
+}
+
+body.dark-mode .signin-box {
+  background-color: #1e1e1e !important;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.6) !important;
+  color: #e0e0e0 !important;
+}
+
+body.dark-mode .signin-title {
+  color: #fff !important;
+}
+
+body.dark-mode .signin-input {
+  background-color: #222 !important;
+  color: #e0e0e0 !important;
+  border: 1px solid #555 !important;
+}
+
+body.dark-mode .signin-input:focus {
+  border-color: #4aa3ff !important;
+  box-shadow: 0 0 5px rgba(74,163,255,0.5) !important;
+}
+
+body.dark-mode .signin-btn {
+  background-color: #007b83 !important;
+  color: #fff !important;
+}
+
+body.dark-mode .signin-btn:hover {
+  background-color: #0097a7 !important;
+}
+
+body.dark-mode .bottom-link {
+  color: #ccc !important;
+}
+
+body.dark-mode .bottom-link a {
+  color: #4aa3ff !important;
+}
+/* -----------------------------
+   Signup Page Dark Mode
+   ----------------------------- */
+body.dark-mode .signup-wrapper {
+  background: linear-gradient(135deg, #1a1a1a, #222) !important;
+  color: #e0e0e0 !important;
+}
+
+body.dark-mode .signup-box {
+  background-color: #1e1e1e !important;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.6) !important;
+  color: #e0e0e0 !important;
+}
+
+body.dark-mode .signup-title {
+  color: #fff !important;
+}
+
+body.dark-mode .signup-input {
+  background-color: #222 !important;
+  color: #e0e0e0 !important;
+  border: 1px solid #555 !important;
+}
+
+body.dark-mode .signup-input:focus {
+  border-color: #4aa3ff !important;
+  box-shadow: 0 0 5px rgba(74,163,255,0.5) !important;
+}
+
+body.dark-mode .signup-btn {
+  background-color: #007b83 !important;
+  color: #fff !important;
+}
+
+body.dark-mode .signup-btn:hover {
+  background-color: #0097a7 !important;
+}
+
+body.dark-mode .divider {
+  color: #ccc !important;
+}
+
+body.dark-mode .google-btn {
+  background-color: #222 !important;
+  border: 1px solid #555 !important;
+  color: #e0e0e0 !important;
+}
+
+body.dark-mode .google-btn:hover {
+  background-color: #333 !important;
+}
+
+body.dark-mode .bottom-link {
+  color: #ccc !important;
+}
+
+body.dark-mode .bottom-link a {
+  color: #4aa3ff !important;
+}
